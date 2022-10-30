@@ -1,22 +1,49 @@
-import express, { urlencoded } from "express";
+import express from "express";
 import cors from "express";
+import {createServer} from "http"
+import {Server} from 'socket.io'
+
+
+
+
+
+
 
 const app = express();
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(cors());
-import http  from "http"
-//var io = require("socket.io")(http.createServer(app));
-import {Server} from 'socket.io';
-const io = new Server(http.createServer(app))
 
 
 
 app.set("view engine","ejs");
+
 app.get("/",(req,res) => {
     res.render("index")
 })
 
+const httpServer = createServer(app);
+httpServer.listen(3001,() => {
+    console.log("conectou direito!")
+})
 
-export default app;
+const io = new Server(httpServer,{cors:{origin:'*'}})
+
+io.on('connection', (socket) => {
+    console.log('conectou')
+    
+      
+      socket.on("disconnect",() => {
+          console.log("X desconectou : "+ socket.id);
+        })
+  
+      socket.on("message",(data) => {
+        
+      io.emit("showMessage",data);
+       
+      })
+      
+  })
+
+export default io;
