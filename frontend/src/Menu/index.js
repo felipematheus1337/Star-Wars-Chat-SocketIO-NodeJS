@@ -2,7 +2,7 @@ import "./styles.css"
 import React from "react";
 import axios from "axios";
 import {useState,useEffect} from "react";
-import luke from "../assets/hansolo.jpg"
+
 
 function Menu() {
 
@@ -12,6 +12,7 @@ function Menu() {
     const [renderSelect,setRenderSelect] = useState(false)
     const [charSelected,setCharSelected] = useState()
     const [imageToRender,setImageToRender] = useState()
+    const [charChoosed,setCharChoosed] = useState()
 
     useEffect(() => {
         async function getChar() {
@@ -30,8 +31,12 @@ function Menu() {
     const sendCharacterToChat = (e) => {
      e.preventDefault();
      
+     
+
+
     }
    
+    
 
 
 
@@ -51,7 +56,8 @@ function Menu() {
                 return char.image
             }
         })
-        setImageToRender(value.image);   
+        setImageToRender(value.image);  
+        setCharChoosed(value) 
         }}>
             {characters.map((char) => (
              (<option value={char.id} onClick={e => {
