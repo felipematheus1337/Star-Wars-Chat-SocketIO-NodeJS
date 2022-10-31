@@ -2,6 +2,9 @@ import express from "express";
 import cors from "express";
 import {createServer} from "http"
 import {Server} from 'socket.io'
+import db from "./config/dbConnect.js";
+import autores from "./models/Autor.js";
+import mensagens from "./models/Mensagem.js";
 
 const corsOptions ={
   origin:'http://localhost:3000',            //access-control-allow-credentials:true
@@ -29,6 +32,13 @@ const httpServer = createServer(app);
 httpServer.listen(3001,() => {
     console.log("conectou direito!")
 })
+
+db.on("error",console.log.bind(console, 'Erro de conexao'))
+
+db.once("open", () => {
+  console.log('conexao com o banco feita com sucesso!')
+})
+
 
 const io = new Server(httpServer,{cors:{origin:'*'}})
 
@@ -88,8 +98,10 @@ io.on('connection', (socket) => {
       },
     ]
     return res.status(200).json(starWarsCharacters)
-  
-    
+  })
+
+  router.post("/char",async (req,res) => {
+
   })
 
 export default io;
