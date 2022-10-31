@@ -2,9 +2,11 @@ import "./styles.css"
 import React from "react";
 import axios from "axios";
 import {useState,useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 
 
 function Menu() {
+    const navigate = useNavigate();
 
     const URL_IO = "http://localhost:3001"
 
@@ -30,16 +32,12 @@ function Menu() {
 
     const sendCharacterToChat = (e) => {
      e.preventDefault();
-     
+     navigate("/chat")
      
 
 
     }
    
-    
-
-
-
  return(
     <div className="container">
         <section class="formulario">
