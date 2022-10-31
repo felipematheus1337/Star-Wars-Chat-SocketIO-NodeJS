@@ -46,6 +46,7 @@ select {
     border-radius: 15px;
     text-align: center;
     padding: .5em;
+    border: 1px solid black;
 }
 
 option {
@@ -67,7 +68,7 @@ button:hover {
 img {
     width: 200px;
     height: 200px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     border-radius: 100px;
 }
 

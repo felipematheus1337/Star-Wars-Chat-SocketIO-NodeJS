@@ -11,10 +11,11 @@ function Menu() {
     const [characters,setCharacters] = useState();
     const [renderSelect,setRenderSelect] = useState(false)
     const [charSelected,setCharSelected] = useState()
+    const [imageToRender,setImageToRender] = useState()
 
     useEffect(() => {
         async function getChar() {
-                await axios.get(`${URL_IO}/char`).then(char => {
+                await axios.get(`${URL_IO}/autor`).then(char => {
                 setCharacters(char.data)
                 setRenderSelect(true)
                }).catch(e => {
@@ -30,6 +31,7 @@ function Menu() {
      e.preventDefault();
      
     }
+   
 
 
 
@@ -37,12 +39,24 @@ function Menu() {
     <div className="container">
         <section class="formulario">
         {renderSelect && 
-        <img  src={luke}/>
+        <img 
+         alt="char image"
+         src={imageToRender === undefined ? characters[0].image : imageToRender}
+         />
         }
         <label>Choose a Character</label>
-        { renderSelect && <select value={charSelected} onChange={e => setCharSelected(e.target.value)}>
+        { renderSelect && <select value={charSelected} onChange={e => {setCharSelected(e.target.value)
+        let value = characters.find(char => {
+            if(char.name === e.target.value) {
+                return char.image
+            }
+        })
+        setImageToRender(value.image);   
+        }}>
             {characters.map((char) => (
-             (<option value={char.id}>{char.name}</option>)
+             (<option value={char.id} onClick={e => {
+                setCharSelected(e.target.value)
+            }}> {char.name}</option>)
             ))}
            
         </select>}

@@ -4,7 +4,8 @@ import {createServer} from "http"
 import {Server} from 'socket.io'
 import db from "./config/dbConnect.js";
 import autores from "./models/Autor.js";
-import mensagens from "./models/Mensagem.js";
+import autorRoutes from "./routes/autorRoutes.js";
+import Message from "./models/Message.js";
 
 const corsOptions ={
   origin:'http://localhost:3000',            //access-control-allow-credentials:true
@@ -58,50 +59,20 @@ io.on('connection', (socket) => {
       
   })
 
-  router.get("/char", (req,res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*")
-    res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.setHeader("Access-Control-Max-Age", "1800");
-    res.setHeader("Access-Control-Allow-Headers", "content-type");
-    res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" );
+ app.use(autorRoutes);
 
-    const starWarsCharacters = [
-      {
-        name:"Luke SkyWalker",
-        id:1,
-        color:"blue",
-        message:"Ola",
-      },
-      {
-        name:"Darth Vader",
-        id:2,
-        color:"black",
-        message:"Ola",
-      },
-      {
-        name:"Han Solo",
-        id:3,
-        color:"gray",
-        message:"Ola",
-      },
-      {
-        name:"Mandaloriano",
-        id:4,
-        color:"red",
-        message:"Ola",
-      },
-      {
-        name:"Leia",
-        id:5,
-        color:"pink",
-        message:"Ola",
-      },
-    ]
-    return res.status(200).json(starWarsCharacters)
-  })
 
-  router.post("/char",async (req,res) => {
+ app.post("/msg",async (req,res) => {
+   let mensagem = await Message.create(req.body);
+   return res.status(201).json(mensagem);
+ })
 
-  })
+ app.get("/msg",async (req,res) => {
+  let mensagem = await Message.find(req.body);
+  console.log(mensagem);
+  return res.status(201).json(mensagem);
+})
+  
 
-export default io;
+
+export default app;

@@ -4,11 +4,12 @@ import mongoose from "mongoose";
 const autorSchema = mongoose.Schema(
     {
         id: {type: String},
-        nome: {type: String,required:true},
+        name: {type: String,required:true},
         color: {type: String},
         image: {type: String},
-
-    }
+        messages:[{type: mongoose.Schema.Types.ObjectId, ref:'message'}]
+    },
+    {timestamps:true}
 )
 
 
