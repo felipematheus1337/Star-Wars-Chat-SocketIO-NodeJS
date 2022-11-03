@@ -15,6 +15,7 @@ function Chat() {
     const [message,setMessage] = useState('')
     const [user,setUser] = useState()
     const {selectedChar} = useContext(CharContext)
+    const [conditional,setConditional] = useState(false)
 
 
 
@@ -24,10 +25,13 @@ function Chat() {
         socket.on('connect', () => {
            setIsConnected(true);
            socket.on('showMessage',(data) => {
-            console.log("chegou")
-            setUser(data)
-            console.log(user)
+           setUser(data);
+            
       
+          })
+
+          socket.emit('listAllMessages',{
+           toRender:true
           })
            
            return () => {
@@ -47,10 +51,12 @@ function Chat() {
         }
         socket.emit('message',userMsg)
     
+       
+       }
+
+       const showMessageByDefault = () => {
         socket.on('showMessage',(data) => {
-          console.log("chegou")
           setUser(data)
-          console.log(user)
     
         })
        }
@@ -60,15 +66,24 @@ function Chat() {
 
 
     return(
-        <div class="container-chat">
+        <div className="container-chat">
              <section className="section-chat">
-                 <div>Mensagem aqui:</div>
-                 <div>Mensagem aqui:</div>
+                 {user && user.map(char => (
+                  <div>
+                    <ul className="characters">
+                      <li key={char.msgId}> 
+                        <img src={char.imageUrl} alt={char.autorId}></img>
+                        <strong style={{color:char.color}}>{char.name}:</strong>
+                        <p style={{color:char.color}}>{char.message}</p>
+                      </li>
+                    </ul>
+                  </div>
+                 ))}
              </section>
 
              <div className="sendmessage">
               <input type="text" placeholder="Digite sua mensagem" />
-              <button onClick={sendMessage}>Enviar</button>
+              <button onClick={showMessageByDefault}>Enviar</button>
              </div>
 
         </div>

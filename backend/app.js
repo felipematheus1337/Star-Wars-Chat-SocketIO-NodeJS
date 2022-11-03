@@ -55,8 +55,14 @@ io.on('connection', (socket) => {
   
       socket.on("message",(data) => {
       userMessages.push(data);
-      io.emit("showMessage",userMessages);
-       console.log(userMessages)
+      })
+
+      socket.on('listAllMessages',async (data) => {
+        if(data.toRender === true) {
+          let mensagem = await Message.find({});
+          const characters = await generateCharsWithRespectiveMessage(mensagem);
+          socket.emit('showMessage',characters)
+        }
       })
       
   })
@@ -69,32 +75,59 @@ io.on('connection', (socket) => {
    return res.status(201).json(mensagem);
  })
 
- app.get("/msg",async (req,res) => {
-  let mensagem = await Message.find({});
-  const total = await generateCharsWithRespectiveMessage(mensagem);
-  return res.status(201).json(mensagem);
-})
 
-const generateCharsWithRespectiveMessage = async (data) => {
-  const chars = [{}];
-  let autor = []
-  for (let i = 0; i<data.length; i++) {
+ 
+
+ 
+ 
+
+const generateCharsWithRespectiveMessage = async (mensagem) => {
+  var autorsId = [];
+  var msgsId = [];
+  var autors = [{}];
+
+  var messages = [];
+  var imagesUrl = []
+  var autor;
+  var characters = [{}];
+  // Generate params 
+  try {
+    for(let i = 0; i<mensagem.length; i++){
+      autorsId.push(mensagem[i].autor[0])
+      msgsId.push(mensagem[i]._id)
+      messages.push(mensagem[i].msg)
     
-     let id = data[i].autor[i]
+    await(Autor.findById(autorsId[i])).then(res => {
      
-     await Autor.findOne(id).then(char => {
-     autor.push(char)
-     })
-     chars.push({
-      message: data[i].msg,
-      id: data[i]._id,
-      //name: await Autor.find({data[i].})
-     }
-    )
-    //console.log(autor[i].name);
+      autor = res
+      imagesUrl.push(res.image);
+    })
+    autors.push(autor);
+    }
+    autors.shift();
+    
+    
+   // Generate Object Character
+    for(let j = 0; j < autors.length; j++) {
+      characters.push({
+        msgId: msgsId[j],
+        autorId: autorsId[j],
+        name: autors[j].name,
+        color: autors[j].color,
+        message: messages[j],
+        imageUrl: imagesUrl[j]
+      })
+    }
+    
+    
+  } catch(e) {
+    console.log(e)
+    return;
   }
-  console.log(autor)
-  return chars;
+ 
+
+  
+  return characters;
 }
   
 

@@ -43,11 +43,11 @@ function Menu() {
    
  return(
     <div className="container">
-        <section class="formulario">
+        <section className="formulario">
         {renderSelect && 
         <img 
-         alt="char image"
          src={imageToRender === undefined ? characters[0].image : imageToRender}
+         alt="image"
          />
         }
         <label>Choose a Character</label>
@@ -61,7 +61,7 @@ function Menu() {
         setCharChoosed(value) 
         }}>
             {characters.map((char) => (
-             (<option value={char.id} onClick={e => {
+             (<option value={char.id} key={char.id} onClick={e => {
                 setCharSelected(e.target.value)
             }}> {char.name}</option>)
             ))}

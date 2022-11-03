@@ -1,5 +1,7 @@
 body {
-   
+   background:url("../assets/images/wallpaper1.jpg");
+   background-repeat: no-repeat;
+  
 }
 
 
@@ -14,7 +16,6 @@ body {
 }
 
 .section-chat {
-    background-color: white;
     color: black;
     height: 400px;
     margin-bottom: 10px;
@@ -22,8 +23,12 @@ body {
     border: 2px solid black;
     max-height: 500px;
     min-height: 500px;
-    background-color: aliceblue;
+    background: rgba(100, 100, 51, .3);
     overflow-y: scroll;
+}
+
+li {
+    list-style: none;
 }
 
 .sendmessage {
@@ -42,4 +47,26 @@ label {
     text-align: center;
     margin-top: 10px;
     display: inline;
+}
+
+.characters {
+    font-size: 13px;
+    margin:0 auto;
+}
+
+.characters img {
+   width: 40px;
+   height: 40px;
+   display: inline;
+   margin:0;
+   margin-right: 10px;
+}
+
+.characters strong {
+    font-size: 20px;
+}
+
+.characters p {
+    font-size: 17px;
+    font-weight: bold;
 }
