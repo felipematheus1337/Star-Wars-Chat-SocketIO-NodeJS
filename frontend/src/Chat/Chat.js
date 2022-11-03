@@ -2,6 +2,8 @@ import React from "react"
 import "./style.css"
 import io from 'socket.io-client'
 import {useState,useEffect} from "react"
+import {useContext} from "react";
+import {CharContext} from "../context/CharContext.js";
 
 const URL_IO = "http://localhost:3001"
 const socket = io(URL_IO);
@@ -12,6 +14,7 @@ function Chat() {
     const [name,setName] = useState('')
     const [message,setMessage] = useState('')
     const [user,setUser] = useState()
+    const {selectedChar} = useContext(CharContext)
 
 
 
@@ -20,7 +23,12 @@ function Chat() {
     useEffect(() => {
         socket.on('connect', () => {
            setIsConnected(true);
-           console.log(isConnected)
+           socket.on('showMessage',(data) => {
+            console.log("chegou")
+            setUser(data)
+            console.log(user)
+      
+          })
            
            return () => {
              socket.off('connect');
@@ -52,8 +60,17 @@ function Chat() {
 
 
     return(
-        <div>
-            <h1>Chat</h1>
+        <div class="container-chat">
+             <section className="section-chat">
+                 <div>Mensagem aqui:</div>
+                 <div>Mensagem aqui:</div>
+             </section>
+
+             <div className="sendmessage">
+              <input type="text" placeholder="Digite sua mensagem" />
+              <button onClick={sendMessage}>Enviar</button>
+             </div>
+
         </div>
     )
 }

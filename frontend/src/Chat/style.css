@@ -1,3 +1,45 @@
 body {
+   
+}
+
+
+.container-chat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
     color : white;
+    max-width: 1200px;
+}
+
+.section-chat {
+    background-color: white;
+    color: black;
+    height: 400px;
+    margin-bottom: 10px;
+    width: 700px;
+    border: 2px solid black;
+    max-height: 500px;
+    min-height: 500px;
+    background-color: aliceblue;
+    overflow-y: scroll;
+}
+
+.sendmessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sendmessage button {
+    margin-left: 10px;
+}
+
+
+label {
+    background-color:rgb(46, 44, 44);
+    text-align: center;
+    margin-top: 10px;
+    display: inline;
 }

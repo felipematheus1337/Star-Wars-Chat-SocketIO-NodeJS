@@ -6,6 +6,8 @@ import db from "./config/dbConnect.js";
 import autores from "./models/Autor.js";
 import autorRoutes from "./routes/autorRoutes.js";
 import Message from "./models/Message.js";
+import Autor from "./models/Autor.js";
+import mongoose from "mongoose"
 
 const corsOptions ={
   origin:'http://localhost:3000',            //access-control-allow-credentials:true
@@ -68,10 +70,32 @@ io.on('connection', (socket) => {
  })
 
  app.get("/msg",async (req,res) => {
-  let mensagem = await Message.find(req.body);
-  console.log(mensagem);
+  let mensagem = await Message.find({});
+  const total = await generateCharsWithRespectiveMessage(mensagem);
   return res.status(201).json(mensagem);
 })
+
+const generateCharsWithRespectiveMessage = async (data) => {
+  const chars = [{}];
+  let autor = []
+  for (let i = 0; i<data.length; i++) {
+    
+     let id = data[i].autor[i]
+     
+     await Autor.findOne(id).then(char => {
+     autor.push(char)
+     })
+     chars.push({
+      message: data[i].msg,
+      id: data[i]._id,
+      //name: await Autor.find({data[i].})
+     }
+    )
+    //console.log(autor[i].name);
+  }
+  console.log(autor)
+  return chars;
+}
   
 
 

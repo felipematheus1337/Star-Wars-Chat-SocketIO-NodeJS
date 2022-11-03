@@ -1,8 +1,10 @@
 import "./styles.css"
 import React from "react";
 import axios from "axios";
-import {useState,useEffect} from "react";
+import {useState,useEffect,useContext} from "react";
 import { useNavigate } from "react-router-dom";
+import {CharContext} from "../context/CharContext.js";
+
 
 
 function Menu() {
@@ -15,6 +17,8 @@ function Menu() {
     const [charSelected,setCharSelected] = useState()
     const [imageToRender,setImageToRender] = useState()
     const [charChoosed,setCharChoosed] = useState()
+    const {setSelectedChar} = useContext(CharContext);
+    
 
     useEffect(() => {
         async function getChar() {
@@ -31,11 +35,10 @@ function Menu() {
 
 
     const sendCharacterToChat = (e) => {
+    
      e.preventDefault();
+     setSelectedChar(charChoosed);
      navigate("/chat")
-     
-
-
     }
    
  return(
