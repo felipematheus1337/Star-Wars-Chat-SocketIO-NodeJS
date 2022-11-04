@@ -61,7 +61,9 @@ io.on('connection', (socket) => {
         if(data.toRender === true) {
           let mensagem = await Message.find({});
           const characters = await generateCharsWithRespectiveMessage(mensagem);
-          socket.emit('showMessage',characters)
+          const sortedCharacters = characters.sort((a,b) => b.created_at - a.created_at);
+          console.log(sortedCharacters)
+          socket.emit('showMessage',sortedCharacters)
         }
       })
       
@@ -75,6 +77,11 @@ io.on('connection', (socket) => {
    return res.status(201).json(mensagem);
  })
 
+ app.get("/msg",async (req,res) => {
+  let listOfMensages = await Message.find({});
+  return res.status(200).json(listOfMensages);
+ })
+
 
  
 
@@ -82,9 +89,11 @@ io.on('connection', (socket) => {
  
 
 const generateCharsWithRespectiveMessage = async (mensagem) => {
+  console.log(mensagem);
   var autorsId = [];
   var msgsId = [];
   var autors = [{}];
+  var created = [{}];
 
   var messages = [];
   var imagesUrl = []
@@ -96,6 +105,7 @@ const generateCharsWithRespectiveMessage = async (mensagem) => {
       autorsId.push(mensagem[i].autor[0])
       msgsId.push(mensagem[i]._id)
       messages.push(mensagem[i].msg)
+      created.push(mensagem[i].createdAt)
     
     await(Autor.findById(autorsId[i])).then(res => {
      
@@ -115,7 +125,8 @@ const generateCharsWithRespectiveMessage = async (mensagem) => {
         name: autors[j].name,
         color: autors[j].color,
         message: messages[j],
-        imageUrl: imagesUrl[j]
+        imageUrl: imagesUrl[j],
+        created_at:created[j]
       })
     }
     
