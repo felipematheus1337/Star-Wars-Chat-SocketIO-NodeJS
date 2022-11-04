@@ -1,0 +1,26 @@
+
+    {
+        "um": {
+            "url":"https://starwars-chat.s3.sa-east-1.amazonaws.com/wallpaper1.jpg",
+            "name":"Death Star"
+        },
+
+        "dois":{
+            "url":"https://starwars-chat.s3.sa-east-1.amazonaws.com/wallpaper2.png",
+            "name":"Storm Trooper"
+        },
+
+        "tres":{
+            "url":"https://starwars-chat.s3.sa-east-1.amazonaws.com/wallpaper3.jpg",
+            "name":"The Mandalorian"
+        },
+        
+        "quatro":{
+            "url":"https://starwars-chat.s3.sa-east-1.amazonaws.com/wallpaper4.jpg",
+            "name":"Legends"},
+        "cinco": {
+            "url":"https://starwars-chat.s3.sa-east-1.amazonaws.com/wallpaper5.jpg",
+            "name":"Machine"
+        }
+            
+      }

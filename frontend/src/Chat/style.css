@@ -1,6 +1,7 @@
 body {
-   background:url("../assets/images/wallpaper1.jpg");
+   background:url("../assets/images/wallpapers/wallpaper4.jpg");
    background-repeat: no-repeat;
+   background-size: cover;
   
 }
 
@@ -10,20 +11,48 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 0 auto;
+    margin: -115px auto;
     color : white;
     max-width: 1200px;
+    height: 100%;
+}
+
+.select-wallpaper-chat {
+    margin:0 auto;
+    position: relative;
+    top: 50px;
+    right: 140px;
+}
+.select-teste {
+    margin:0 auto;
+    position: relative;
+    top: 50px;
+    right: 140px;
+    margin-bottom: 30px;
+    background-color: #FFE81F;
+    height: 35px;
+    border-radius: 15px;
+    text-align: center;
+    padding: .5em;
+    border: 1px solid black;
+    font-family: 'Star Jedi', arial;
+}
+
+
+
+option {
+    border-radius: 20px;
 }
 
 .section-chat {
     color: black;
     height: 400px;
     margin-bottom: 10px;
-    width: 700px;
+    width: 1000px;
     border: 2px solid black;
     max-height: 500px;
     min-height: 500px;
-    background: rgba(100, 100, 51, .3);
+    background: rgba(59, 56, 56, 0.6);
     overflow-y: scroll;
 }
 
@@ -70,3 +99,25 @@ label {
     font-size: 17px;
     font-weight: bold;
 }
+
+input {
+    width: 500px;
+    height: 50px;
+    font-size: 20px;
+    background-color: rgb(46, 44, 44,0.5);
+    
+}
+
+.btn {
+    width: 150px;
+    height: 40px;
+}
+
+.img-profile {
+    display: inline;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    margin-right: 15px;
+}
+

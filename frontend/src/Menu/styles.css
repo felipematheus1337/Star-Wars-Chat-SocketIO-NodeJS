@@ -1,23 +1,44 @@
 body {
     background-color: rgb(46, 44, 44);
+    font-family: 'Star Jedi', arial;
+    text-shadow: 0px 0px 0px #aaa;
 }
 
+
+
+
 .container {
-    margin: 0 auto;
+    margin: -150px auto;
     display: flex;
     justify-content: center;
     text-align: center;
     align-items: center;
     flex-direction: column;
-    width: 700px;
+    width: 800px;
     height: 620px;
     color: white;
  
     
+ 
+    
+}
+.select-wallpaper-menu {
+    margin:0 auto;
+    position: relative;
+    top: 50px;
+    right: 140px;
+    margin-bottom: 30px;
+    background-color: #FFE81F;
+    height: 35px;
+    border-radius: 15px;
+    text-align: center;
+    padding: .5em;
+    border: 1px solid black;
+    font-family: 'Star Jedi', arial;
 }
 
 .formulario{
-    width: 550px;
+    width: 350px;
     display: flex;
     height: 550px;
     flex-direction: column;
@@ -25,28 +46,40 @@ body {
     justify-content: center;
     border-radius: 5px;
     margin: 0 auto;
+    background-color: rgb(121, 121, 165,0.3);
+    border-radius: 30px;
+    font-family: 'Star Jedi', arial;
+}
+
+.logo {
+    margin:0;
+    width: 150px;
+    height: 120px;
 }
 
 
 input {
     display: block;
     margin: 15px auto;
-    
+    font-family: CustomFont;
 }
 
 label {
     margin-bottom: 30px;
     background-color: black;
+    font-family: CustomFont;
 }
 
 select {
     margin-bottom: 30px;
-    background-color: rgb(228, 255, 73);
+    background-color: #FFE81F;
     height: 30px;
     border-radius: 15px;
     text-align: center;
     padding: .5em;
     border: 1px solid black;
+    font-family: 'Star Jedi', arial;
+    
 }
 
 option {
@@ -54,7 +87,7 @@ option {
 }
 
 button {
-    background-color: rgb(228, 255, 73);
+    background-color: #FFE81F;
     width: 100px;
     height: 30px;
     border-radius: 25px;

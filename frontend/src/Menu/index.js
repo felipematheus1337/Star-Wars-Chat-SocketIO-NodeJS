@@ -4,7 +4,8 @@ import axios from "axios";
 import {useState,useEffect,useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import {CharContext} from "../context/CharContext.js";
-
+import logo from "../assets/images/logo.png";
+import wallpapers from "../Chat/wallpapers.json";   
 
 
 function Menu() {
@@ -19,7 +20,16 @@ function Menu() {
     const [charChoosed,setCharChoosed] = useState()
     const {setSelectedChar} = useContext(CharContext);
     
-
+    const [selectedWallpaper,SetSelectedWallpaper] = useState([wallpapers.um,wallpapers.dois,
+        wallpapers.tres,wallpapers.quatro,wallpapers.cinco])
+        const selectWallpaper = selectedWallpaper.map(wallpaper => wallpaper)
+        const changeWallpaper = (e) => {
+          let url = selectedWallpaper[e.target.value].url
+          let bodie = document.getElementsByTagName('body')[0]
+          bodie.style.backgroundImage = `url(${url})`
+          console.log(bodie.style.backgroundImage)
+    
+        }
     useEffect(() => {
         async function getChar() {
                 await axios.get(`${URL_IO}/autor`).then(char => {
@@ -35,13 +45,23 @@ function Menu() {
 
 
     const sendCharacterToChat = (e) => {
-    
      e.preventDefault();
      setSelectedChar(charChoosed);
+     localStorage.setItem("char",charChoosed.image);
      navigate("/chat")
     }
    
  return(
+    <>
+    <img className="logo" src={logo}/>
+    <select 
+        className="select-wallpaper-menu"
+        onChange={e => changeWallpaper(e)}>
+          {
+          selectWallpaper.map((wallpaper,key) => <option value={key}>{wallpaper.name}</option>)
+          }
+                  
+        </select>
     <div className="container">
         <section className="formulario">
         {renderSelect && 
@@ -74,6 +94,8 @@ function Menu() {
         </section>
 
     </div>
+    
+    </>
  )
 }
 
