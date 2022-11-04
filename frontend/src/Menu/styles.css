@@ -116,4 +116,8 @@ img {
     margin-right: 460px;
   }
 
+  .select-wallpaper-menu {
+    display: none;
+}
+
 }

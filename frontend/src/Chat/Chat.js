@@ -3,11 +3,15 @@ import "./style.css"
 import io from 'socket.io-client'
 import {useState,useEffect} from "react"
 import {useContext} from "react";
+import { useNavigate } from "react-router-dom";
 import {CharContext} from "../context/CharContext.js";
 import logo from "../assets/images/logo.png";
 import wallpapers from "./wallpapers.json";
 const URL_IO = "http://localhost:3001"
 const socket = io(URL_IO);
+
+
+
 
 
 function Chat() {
@@ -16,14 +20,15 @@ function Chat() {
     const [message,setMessage] = useState('')
     const [user,setUser] = useState()
     const {selectedChar} = useContext(CharContext)
-    const [conditional,setConditional] = useState(false)
-    const [wallpaperStore,setWallpaperStore] = useState(localStorage.getItem('wallpaper') || "https://starwars-chat.s3.sa-east-1.amazonaws.com/wallpaper1.jpg")
+    const [msg,setMsg] = useState("")
     
 
 
     const [selectedWallpaper,SetSelectedWallpaper] = useState([wallpapers.um,wallpapers.dois,
     wallpapers.tres,wallpapers.quatro,wallpapers.cinco])
+
     const selectWallpaper = selectedWallpaper.map(wallpaper => wallpaper)
+
     const changeWallpaper = (e) => {
       let url = selectedWallpaper[e.target.value].url
       localStorage.setItem('wallpaper',url)
@@ -32,7 +37,6 @@ function Chat() {
       
 
     }
-
    
 
     const firstRenderWallpaper = () => {
@@ -41,47 +45,70 @@ function Chat() {
     }
 
 
-
+    
     useEffect(() => {
         socket.on('connect', () => {
            setIsConnected(true);
            socket.on('showMessage',(data) => {
-           setUser(data);
+            let messagesNotNull = data.filter((data) => {
+              if(data.message) {
+                return data;
+              }
+            })
             
-      
+           setUser(messagesNotNull);
           })
+         
 
           socket.emit('listAllMessages',{
            toRender:true
           })
          
           firstRenderWallpaper();
-           
            return () => {
              socket.off('connect');
              socket.off('disconnect');
            };
          });
+
+         socket.emit('listAllMessages',{
+          toRender:true
+         })
+           
+          showMessageByDefault();
+         
+        
          
        },[])
 
        
+
+       
        const sendMessage = async (e) => {
         e.preventDefault();
+        let id = localStorage.getItem("charId")
         let userMsg = {
-          name,
-          message
+          autor:id,
+          msg:msg
         }
         socket.emit('message',userMsg)
-    
+        let inputClear = document.getElementsByClassName("inputMsg")[0]
+        inputClear.value = ''
+         
        
        }
 
        const showMessageByDefault = () => {
         socket.on('showMessage',(data) => {
-          setUser(data)
-    
+          let messagesNotNull = data.filter((data) => {
+            if(data.message) {
+              return data;
+            }
+          })
+          
+         setUser(messagesNotNull);
         })
+        
       }
 
       const getProfile = () => {
@@ -122,8 +149,15 @@ function Chat() {
              <div className="sendmessage">
               
               <img src={getProfile()} className="img-profile"/>
-              <input style={{color:selectedChar.color}} type="text" placeholder="Digite sua mensagem" />
-              <button onClick={showMessageByDefault} className="btn">Enviar</button>
+              <input style={{color:selectedChar.color}}
+               type="text" 
+               placeholder="Digite sua mensagem"
+                onChange={(e) => setMsg(e.target.value)}
+                className="inputMsg"
+                 />
+              <button onClick={sendMessage} className="btn">
+                Enviar
+                </button>
              </div>
 
         </div>

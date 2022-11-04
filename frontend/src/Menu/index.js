@@ -27,7 +27,7 @@ function Menu() {
           let url = selectedWallpaper[e.target.value].url
           let bodie = document.getElementsByTagName('body')[0]
           bodie.style.backgroundImage = `url(${url})`
-          console.log(bodie.style.backgroundImage)
+          
     
         }
     useEffect(() => {
@@ -48,6 +48,7 @@ function Menu() {
      e.preventDefault();
      setSelectedChar(charChoosed);
      localStorage.setItem("char",charChoosed.image);
+     localStorage.setItem("charId",charChoosed._id)
      navigate("/chat")
     }
    

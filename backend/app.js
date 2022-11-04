@@ -43,7 +43,7 @@ db.once("open", () => {
 })
 
 
-const io = new Server(httpServer,{cors:{origin:'*'}})
+const io = new Server(httpServer,{cors:{origin:'*'}},{transports: ['websocket'],upgrade:false})
 
 io.on('connection', (socket) => {
     console.log('conectou')
@@ -53,17 +53,22 @@ io.on('connection', (socket) => {
           console.log("X desconectou : "+ socket.id);
         })
   
-      socket.on("message",(data) => {
-      userMessages.push(data);
+      socket.on("message",async (data) => {
+        let mensagem = await Message.create(data)
+        if(mensagem) {
+          let msgs= await Message.find({}).sort({createdAt:-1});
+          const characters = await generateCharsWithRespectiveMessage(msgs);
+          //const sortedCharacters = characters.sort((a,b) => b.created_at - a.created_at);
+          socket.emit('showMessage',characters)
+        }
       })
 
       socket.on('listAllMessages',async (data) => {
         if(data.toRender === true) {
-          let mensagem = await Message.find({});
+          let mensagem = await Message.find({}).sort({createdAt:-1});
           const characters = await generateCharsWithRespectiveMessage(mensagem);
-          const sortedCharacters = characters.sort((a,b) => b.created_at - a.created_at);
-          console.log(sortedCharacters)
-          socket.emit('showMessage',sortedCharacters)
+          //const sortedCharacters = characters.sort((a,b) => b.created_at - a.created_at);
+          socket.emit('showMessage',characters)
         }
       })
       

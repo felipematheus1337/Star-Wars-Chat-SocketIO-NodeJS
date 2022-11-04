@@ -23,20 +23,7 @@ body {
     top: 50px;
     right: 140px;
 }
-.select-teste {
-    margin:0 auto;
-    position: relative;
-    top: 50px;
-    right: 140px;
-    margin-bottom: 30px;
-    background-color: #FFE81F;
-    height: 35px;
-    border-radius: 15px;
-    text-align: center;
-    padding: .5em;
-    border: 1px solid black;
-    font-family: 'Star Jedi', arial;
-}
+
 
 
 
@@ -52,7 +39,8 @@ option {
     border: 2px solid black;
     max-height: 500px;
     min-height: 500px;
-    background: rgba(59, 56, 56, 0.6);
+    background: rgba(59, 56, 56, 0.9);
+   
     overflow-y: scroll;
 }
 
@@ -81,6 +69,7 @@ label {
 .characters {
     font-size: 13px;
     margin:0 auto;
+    
 }
 
 .characters img {
@@ -93,10 +82,11 @@ label {
 
 .characters strong {
     font-size: 20px;
+    font-weight: bold;
 }
 
 .characters p {
-    font-size: 17px;
+    font-size: 19px;
     font-weight: bold;
 }
 
@@ -120,4 +110,118 @@ input {
     margin: 0 auto;
     margin-right: 15px;
 }
+
+@media only screen and (max-width: 991px) {
+    .section-chat {
+        color: black;
+        height: auto;
+        margin-bottom: 10px;
+        width: auto;
+        border: 2px solid black;
+        max-height: 500px;
+        min-height: 500px;
+        background: rgba(59, 56, 56, 0.9);
+        overflow-y: scroll;
+    }
+
+    input {
+        width: auto;
+        height: auto;
+        font-size: 15px;
+        background-color: rgb(46, 44, 44,0.5);
+        
+    }
+    
+    .btn {
+        width: auto;
+        height: auto;
+    }
+
+    .select-wallpaper-chat {
+        margin-bottom: 80px;
+        width: auto;
+        height: auto;
+        display: none;
+    }
+    
+    
+  
+  }
+
+  @media only screen and (max-width: 399px) {
+    .section-chat {
+        color: black;
+        height: auto;
+        margin-bottom: 10px;
+        width: auto;
+        border: 2px solid black;
+        max-height: 500px;
+        min-height: 500px;
+        background: rgba(59, 56, 56, 0.9);
+        overflow-y: scroll;
+    }
+
+    input {
+        width: auto;
+        height: auto;
+        font-size: 15px;
+        background-color: rgb(46, 44, 44,0.5);
+        
+    }
+    
+    .btn {
+        width: auto;
+        height: auto;
+    }
+
+    .select-wallpaper-chat {
+        margin-bottom: 80px;
+        width: auto;
+        height: auto;
+        display: none;
+    }
+    .img-profile {
+        display: none;
+    }
+    
+    
+}
+
+@media only screen and (max-width: 1115px) {
+    .section-chat {
+        color: black;
+        height: auto;
+        margin-bottom: 10px;
+        width: auto;
+        border: 2px solid black;
+        max-height: 500px;
+        min-height: 500px;
+        background: rgba(59, 56, 56, 0.9);
+        overflow-y: scroll;
+    }
+
+    input {
+        width: auto;
+        height: auto;
+        font-size: 15px;
+        background-color: rgb(46, 44, 44,0.5);
+        
+    }
+    
+    .btn {
+        width: auto;
+        height: auto;
+    }
+
+    .select-wallpaper-chat {
+        margin-bottom: 80px;
+        width: auto;
+        height: auto;
+        display: none;
+    }
+    
+    
+  
+  }
+  
 
