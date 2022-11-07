@@ -11,7 +11,8 @@ import wallpapers from "../Chat/wallpapers.json";
 function Menu() {
     const navigate = useNavigate();
 
-    const URL_IO = "http://localhost:3001"
+    //const URL_IO = "http://localhost:3001"
+    const URL_IO = "https://star-wars-chat-socket-io-node-js-backend.vercel.app/"
 
     const [characters,setCharacters] = useState();
     const [renderSelect,setRenderSelect] = useState(false)
