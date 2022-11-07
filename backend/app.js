@@ -9,13 +9,10 @@ import Message from "./models/Message.js";
 import Autor from "./models/Autor.js";
 import mongoose from "mongoose"
 
-const corsOptions ={
-  origin:'https://frontend-starwarschat-dwqlewk1p-felipematheus1337.vercel.app/',            //access-control-allow-credentials:true
-  optionSuccessStatus:200
-}
+
 
 const app = express();
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
