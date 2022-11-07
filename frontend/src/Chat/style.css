@@ -1,5 +1,5 @@
 body {
-   background:url("../assets/images/wallpapers/wallpaper4.jpg");
+   background:url("../assets/images/wallpapers/wallpaper1.jpg");
    background-repeat: no-repeat;
    background-size: cover;
   
@@ -151,15 +151,32 @@ input {
   @media only screen and (max-width: 399px) {
     .section-chat {
         color: black;
-        height: auto;
         margin-bottom: 10px;
-        width: auto;
         border: 2px solid black;
-        max-height: 500px;
+        max-height: 300px;
         min-height: 500px;
+        height: auto;
+         width: auto;
         background: rgba(59, 56, 56, 0.9);
         overflow-y: scroll;
     }
+
+    ::-webkit-scrollbar {
+        width: 1em;
+        height: 1em
+    }
+    
+    ::-webkit-scrollbar-button {
+        background: #FFE81F;
+    }
+
+    ::-webkit-scrollbar-track-piece {
+        background: #888
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #eee
+    }​
 
     input {
         width: auto;
@@ -181,7 +198,8 @@ input {
         display: none;
     }
     .img-profile {
-        display: none;
+        width: 30px;
+        height: 30px;
     }
     
     

@@ -119,7 +119,7 @@ function Chat() {
 
 
     return(
-      <>
+      <div className="forall">
       <img className="logo" src={logo}/>
      
       <select 
@@ -162,7 +162,7 @@ function Chat() {
 
         </div>
         
-        </>
+        </div>
     )
 }
 

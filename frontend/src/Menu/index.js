@@ -28,6 +28,7 @@ function Menu() {
           let bodie = document.getElementsByTagName('body')[0]
           bodie.style.backgroundImage = `url(${url})`
           
+          
     
         }
     useEffect(() => {
@@ -53,7 +54,8 @@ function Menu() {
     }
    
  return(
-    <>
+    <div className="forall">
+        
     <img className="logo" src={logo}/>
     <select 
         className="select-wallpaper-menu"
@@ -96,7 +98,7 @@ function Menu() {
 
     </div>
     
-    </>
+    </div>
  )
 }
 

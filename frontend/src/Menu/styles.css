@@ -2,9 +2,8 @@ body {
     background-color: rgb(46, 44, 44);
     font-family: 'Star Jedi', arial;
     text-shadow: 0px 0px 0px #aaa;
+    
 }
-
-
 
 
 .container {
@@ -16,12 +15,10 @@ body {
     flex-direction: column;
     width: 800px;
     height: 620px;
+    max-height: 680px;
     color: white;
- 
-    
- 
-    
 }
+
 .select-wallpaper-menu {
     margin:0 auto;
     position: relative;
@@ -56,6 +53,7 @@ body {
     width: 150px;
     height: 120px;
 }
+
 
 
 input {
@@ -108,16 +106,42 @@ img {
 
 
 
-@media only screen and (max-width: 462px) {
+
+@media only screen and (max-width: 600px) {
   .formulario {
     display: flex;
     flex-direction: column;
     margin-left: 0;
-    margin-right: 460px;
   }
 
   .select-wallpaper-menu {
     display: none;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vh;
+    height: 100vh;
+    max-height: 100vh;
 }
+
+.forall {
+    height: 1200px;
+}
+
+}
+
+
+@media only screen and (max-width: 1200px) {
+   
+  .forall {
+      height: 100vh;
+      background-size: cover;
+  }
+  
+  }
+  
