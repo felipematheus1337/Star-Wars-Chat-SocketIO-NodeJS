@@ -10,7 +10,7 @@ import Autor from "./models/Autor.js";
 import mongoose from "mongoose"
 
 const corsOptions ={
-  origin:'http://localhost:3000',            //access-control-allow-credentials:true
+  origin:'https://frontend-starwarschat-dwqlewk1p-felipematheus1337.vercel.app/',            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }
 
